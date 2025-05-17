@@ -1,2 +1,1 @@
-# malak-michele_pygame
-# è solo una prova
+quindi facciamo la nonna che schiva gli ostacoli, teniamo la nonna ferma e facciamo andare verso di lei il mondo. dobbiamo capire che ostacoli fare e come farli. ispiriamoci un po al gioco dell'uccello che passa nei tubi.
