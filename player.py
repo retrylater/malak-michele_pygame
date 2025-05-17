@@ -10,11 +10,12 @@ class Nonna:
         self.image = pygame.transform.scale(immagine_originale, (nuova_larghezza, nuova_altezza))
         self.rect = self.image.get_rect()
         self.x = pos[0]
-        self.y = pos[1]
+        self.y = pos[1] 
 
+#bisogna capire come modificare la rect 
         self.vx = 8
         self.vy = 8
         #self.g= 0.5 #cos'è?
-        
+         
     
     
