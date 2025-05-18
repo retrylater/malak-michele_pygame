@@ -13,14 +13,20 @@ pygame.display.set_caption("Nonna Rampage")
 clock = pygame.time.Clock()
 fps = 60
 nonna = Nonna((150, 300))
-asteroide = Asteroide((140, 200))
+asteroide = Asteroide()
 asteroidi = []
+type(asteroidi) == Asteroide
 running = True
+
+intervallo_gener = 1000  
+generazione_a = pygame.USEREVENT + 1
+pygame.time.set_timer(generazione_a, intervallo_gener)
 
 def disegna_oggetti():
     screen.blit(sfondo, (0,0))
     screen.blit(nonna.image, (nonna.x, nonna.y))
-    screen.blit(asteroide.image,(asteroide.x, asteroide.y))
+    for a in asteroidi:
+        a.disegna(screen)
 
 def aggiorna():
     pygame.display.update()
@@ -39,21 +45,18 @@ while running:
             nonna.x -= nonna.vx
         if (event.type == pygame.KEYDOWN and event.key == pygame.K_d):
             nonna.x += nonna.vx
-             
-    # for _ in range(1):               
-    #     x = 800                       # volevo generare più asteroidi alla voltasolo che me ne escono troppi, dobbiamo pensare a generare un tot asteroidi ogni tot tempo
-    #     y = random.randint(0, 550)
-    #     asteroidi.append(Asteroide((x, y)))
+        if event.type == generazione_a:
+            nuovo = Asteroide()
+            asteroidi.append(nuovo) 
 
-    # for asteroide in asteroidi:
-    asteroide.aggiorna()
+    for a in asteroidi:
+        a.aggiorna_a()
+    asteroidi = [a for a in asteroidi if not a.fuori_schermo()]
 
     disegna_oggetti()
-    # for asteroide in asteroidi:
-    asteroide.disegna(screen)
 
     aggiorna()
- 
+
     pygame.display.flip()
     clock.tick(60)
 
