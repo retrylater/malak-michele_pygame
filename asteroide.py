@@ -4,23 +4,16 @@ import random
 class Asteroide:
     def __init__(self):
         immagine_base = pygame.image.load("asteroide.png")
-        scala_x = random.uniform(0.5, 1.5)
-        scala_y = random.uniform(0.5, 1.5)
-        larghezza_base = 100
-        altezza_base = 100
-        larghezza_a = larghezza_base * scala_x
-        altezza_a = altezza_base * scala_y
+        larghezza_a = 100
+        altezza_a = 100
         self.image = pygame.transform.scale(immagine_base, (larghezza_a, altezza_a))
+        self.mask = pygame.mask.from_surface(self.image)
         self.vx = 8
-        
         self.x = 800
         self.y = random.randint(0, 600 - int (altezza_a))
-
-        #self.rect.topleft = (self.x, self.y)
         
         self.altezza = altezza_a
         self.larghezza = larghezza_a
-
 
     def aggiorna_a(self):
         self.x -= self.vx
@@ -30,3 +23,7 @@ class Asteroide:
 
     def fuori_schermo(self):
         return self.x + self.larghezza < 0
+    
+    def collisione(self, pos_nonna, mask_nonna):
+        offset = (int(self.x - pos_nonna[0]), int(self.y - pos_nonna[1]))
+        return self.mask.overlap(mask_nonna, offset) is not None
