@@ -1,0 +1,26 @@
+import pygame
+import random
+
+class Orologio:
+    def __init__(self):
+        immagine_base = pygame.image.load("orologio.png").convert_alpha()
+        self.altezza = 40
+        self.larghezza = 40
+        self.image = pygame.transform.scale(immagine_base, (self.larghezza, self.altezza))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.vx = 8
+        self.x = 800
+        self.y = random.randint(0, 600 - self.altezza)
+
+    def aggiorna_o(self):
+        self.x -= self.vx
+
+    def disegna_o(self, screen):
+        screen.blit(self.image, (self.x, self.y))
+
+    def fuori_schermo_o(self):
+        return self.x + self.larghezza < 0
+    
+    def collide_o(self, pos_nonna, mask_nonna):
+        offset = (int(self.x - pos_nonna[0]), int(self.y - pos_nonna[1]))
+        return self.mask.overlap(mask_nonna, offset) is not None
