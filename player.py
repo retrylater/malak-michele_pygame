@@ -6,7 +6,7 @@ class Nonna:
         nuova_larghezza = 70
         nuova_altezza = 70
         self.image = pygame.transform.scale(immagine_originale, (nuova_larghezza, nuova_altezza))
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(self.image, 0)
         self.rect = self.image.get_rect()
         self.x = pos[0]
         self.y = pos[1] 

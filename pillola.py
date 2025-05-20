@@ -8,7 +8,7 @@ class Pillola:
         self.altezza = 40
         self.larghezza = 40
         self.image = pygame.transform.scale(immagine_base, (self.larghezza, self.altezza))
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(self.image, 0)
         self.vx = 8
         self.x = 800
         self.y = random.randint(0, 600 - self.altezza)

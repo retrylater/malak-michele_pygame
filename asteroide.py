@@ -7,7 +7,7 @@ class Asteroide:
         larghezza_a = 80
         altezza_a = 80
         self.image = pygame.transform.scale(immagine_base, (larghezza_a, altezza_a))
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(self.image, 0)
         self.vx = 8
         self.x = 800
         self.y = random.randint(0, 600 - int (altezza_a))

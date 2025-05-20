@@ -4,7 +4,6 @@ from player import Nonna
 from asteroide import Asteroide
 from orologio import Orologio
 from pillola import Pillola
-import random
 
 pygame.init()
 tempo_inizio = pygame.time.get_ticks()
