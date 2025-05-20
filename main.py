@@ -12,13 +12,13 @@ pygame.key.set_repeat(10,10)
 sfondo = pygame.image.load('sfondo_spaziale.png')
 
 rallentamento_base = pygame.image.load('rallentamento.png')
-altezza_rallentamento = 400
-larghezza_rallentamento = 600
+altezza_rallentamento = 600
+larghezza_rallentamento = 800
 rallentamento_image = pygame.transform.scale(rallentamento_base, (larghezza_rallentamento, altezza_rallentamento))
 
 invincibile_base = pygame.image.load('invincibile.png')
-altezza_invincibile = 400
-larghezza_invincibile = 600
+altezza_invincibile = 600
+larghezza_invincibile = 800
 invincibile_image = pygame.transform.scale(invincibile_base, (larghezza_invincibile, altezza_invincibile))
 
 esplosione_base = pygame.image.load("esplosione.png")
@@ -35,12 +35,12 @@ screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Nonna Rampage(Spaziale)")
 clock = pygame.time.Clock()
 fps = 60
-orologi = []
+
 nonna = Nonna((150, 300))
-asteroide = Asteroide()
+
 asteroidi = []
 pillole = []
-running = True
+orologi = []
 
 tempo_invincibile_inizio = 0
 durata_invincibilita = 3000  
@@ -59,13 +59,12 @@ tempo_rallentamento_inizio = 0
 tempo_rallentamento_fine = 5000
 
 mostra_scritta_invincibile = False
-tempo_scritta_invincibile = 0
+tempo_scritta_rallentamento = 0
 
 mostra_scritta_rallentamento = False
 tempo_scritta_rallentamento = 0
 
-durata_scritta = 1000
-
+durata_scritta = 3000
 
 def disegna_oggetti(Rallentamento):
     screen.blit(sfondo, (0,0))
@@ -81,6 +80,7 @@ def aggiorna():
     pygame.display.update()
     clock.tick(fps)
 
+running = True
 gioco_attivo = True
 Rallentamento = False
 Invincibile = False
@@ -138,6 +138,7 @@ while running:
     if gioco_attivo:
         tempo_corrente = pygame.time.get_ticks()
         punteggio = (tempo_corrente - tempo_inizio) // 100
+
         for a in asteroidi:
             a.aggiorna_a(Rallentamento)
         asteroidi = [a for a in asteroidi if not a.fuori_schermo_a()]
@@ -199,6 +200,7 @@ while running:
         current_time = pygame.time.get_ticks()
         if current_time - tempo_invincibile_inizio > durata_invincibilita:
             Invincibile = False
+        
 
     if mostra_scritta_invincibile:
         if pygame.time.get_ticks() - tempo_scritta_invincibile < durata_scritta:
