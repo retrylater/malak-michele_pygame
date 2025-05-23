@@ -4,6 +4,8 @@ from player import Nonna
 from asteroide import Asteroide
 from orologio import Orologio
 from pillola import Pillola
+from restart import Restart
+
 
 pygame.init()
 tempo_inizio = pygame.time.get_ticks()
@@ -37,6 +39,7 @@ clock = pygame.time.Clock()
 fps = 60
 
 nonna = Nonna((150, 300))
+bottone = Restart()
 
 asteroidi = []
 pillole = []
@@ -190,7 +193,25 @@ while running:
         punteggio_finale = punteggio
         screen.blit(esplosione, (pos_nonna[0], pos_nonna[1]))
         screen.blit(gameover, (100, 100))
-    
+        bottone.disegna(screen)
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    pos_mouse = pygame.mouse.get_pos()
+                    if bottone.schiacciato(pos_mouse):
+                        running = True
+                        punteggio = 0
+                        gioco_attivo = True
+                        Rallentamento = False
+                        Invincibile = False
+                        tempo_inizio = pygame.time.get_ticks()
+                        nonna = Nonna((150, 300))
+                        asteroidi = []
+                        orologi = []
+                        pillole = []
+
+
+        
     if Rallentamento:
         current_time = pygame.time.get_ticks()
         if current_time - tempo_rallentamento_inizio > tempo_rallentamento_fine:
